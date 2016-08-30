@@ -22,7 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-        <coverallskey>coveralls-key</coverallskey>
+		<coverallskey>coveralls-key</coverallskey>
 	</properties>
 
 	<dependencies>
@@ -60,6 +60,11 @@
 				<groupId>org.eluder.coveralls</groupId>
 				<artifactId>coveralls-maven-plugin</artifactId>
 				<version>4.2.0</version>
+			</plugin>
+
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
