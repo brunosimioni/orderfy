@@ -8,6 +8,8 @@ public class ProductDTO {
     public String name;
     public String category;
     
+    public ProductDTO() {};
+    
     public ProductDTO(Integer id, String name, String category) {
     	this.id = id;
     	this.name = name;
