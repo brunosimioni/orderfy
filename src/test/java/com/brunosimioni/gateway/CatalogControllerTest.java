@@ -18,14 +18,13 @@ public class CatalogControllerTest {
 	@Autowired
 	private TestRestTemplate restTemplate;
 
-
 	@Test
 	public void test() {
 
 		ProductDTO[] catalog = this.restTemplate.getForObject("/catalog", ProductDTO[].class);
 		ProductDTO[] expectedCatalog = new ProductDTO[1];
 		expectedCatalog[0] = new ProductDTO(1, "Product 1", "Category A");
-		
-        assertThat(catalog).isEqualTo(expectedCatalog);
+
+		assertThat(catalog).isEqualTo(expectedCatalog);
 	}
 }

@@ -13,10 +13,10 @@ public class CatalogController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	public List<ProductDTO> getAllProducts() {
-		
+
 		List<ProductDTO> products = new ArrayList<ProductDTO>();
 		products.add(new ProductDTO(1, "Product 1", "Category A"));
-		
+
 		return products;
 	}
 }
