@@ -5,3 +5,8 @@ sudo: false
 branches:
   only:
   - master
+deploy:
+  provider: heroku
+  app: an-ecommmerce-platform
+  api_key:
+    secure: YsqAuLkFWNQ8XBUs9/qBM7hMzmgY3vIIJ2m5/1yPoWH7jZup+ejkT9cpUryKQlbEAO/jIa+vNJGMUkIrP3Q3BJVxzc73qeHWjByqpk0nE7qfXBRdreleDHkOZYlGS9nATTfiRFwlZv37tIofvvaweZti56uEjP1zhg6TjU3cCZROXqm/KE07wrm27MIWNSas+1+p/BIB2id+zcwgtWoSWiLdiM6KR9ogcpraq4rrigeQ+b6DicGf04LxWMw0sxKsanvCe+YGo7Esm04dkTjSfZd6wXM0lLAjZ8BiSOTFkac0Igjqe6U97C3LMVfP/UknbGMDcMl4Z3eNlyk3nCErY4fJv2bOn2F+/bsCHEn1gTjXvuuJPVwatVQt90VIW1+0NhSeElFWlxBgiXE574hieJEhKPl0OLq9Xfod3S6BSVHurHfNcbEusDYRpPQzru/oxHWzsye98WAI+PZMLrkrEvLkkoHOrpjYQioiHByuSIC3kRjSbZjj90vP/Zp70+oAAN0anbeofkYUnvEq0BkxiJ/4eEflzqM38fO3QTNOW5dDk+rouGy1Tka7O2raQSTclIErgpGKQCv8bEOGo37tl9WaYMvx8B+F0tn0UM/XgQWD97OtcsBd9oz6+8M1vmos2h8CvqbP5iePn5JNbod3pIrxThS2yECvxpzUf5rODE0=
