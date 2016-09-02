@@ -1,4 +1,4 @@
-package com.brunosimioni.gateway;
+package catalog.gateway;
 
 import lombok.Data;
 

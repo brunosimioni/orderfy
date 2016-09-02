@@ -9,3 +9,5 @@ A simple proof-of-concept ecommerce platform
 - Spring Boot 1.4.0 testing
 - Travis CI continuous integration
 - Heroku continuous deployment
+- Spring Cloud Netflix OSS
+- Docker-Compose provisioning

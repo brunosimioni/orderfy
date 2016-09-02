@@ -1,4 +1,4 @@
-package com.brunosimioni.gateway;
+package catalog.gateway;
 
 import java.util.ArrayList;
 import java.util.List;
