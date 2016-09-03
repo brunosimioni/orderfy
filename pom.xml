@@ -24,7 +24,7 @@
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Camden.M1</spring-cloud.version>
 		<docker.plugin.version>0.4.12</docker.plugin.version>
-		<docker.image.prefix>ecommmerce-platform</docker.image.prefix>
+		<docker.image.prefix>ecommerce-platform</docker.image.prefix>
 	</properties>
 
 	<dependencyManagement>
@@ -117,8 +117,10 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>${docker.plugin.version}</version>
 				<configuration>
-					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<imageName>brunosimioni/${docker.image.prefix}.${project.artifactId}</imageName>
 					<dockerDirectory>src/main/docker</dockerDirectory>
+					<serverId>docker-hub</serverId>
+					<useConfigFile>true</useConfigFile>
 					<resources>
 						<resource>
 							<targetPath>/</targetPath>
