@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.0.RELEASE</version>
+		<version>1.4.1.RELEASE</version>
 	</parent>
 
 	<groupId>com.brunosimioni</groupId>
@@ -15,8 +15,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>microservices/catalog-service</module>
-		<module>microservices/customers-service</module>
+		<module>backend-services/catalog-service</module>
+		<module>backend-services/customers-service</module>
 	</modules>
 
 	<properties>
