@@ -5,12 +5,12 @@
 
     <parent>
 	    <groupId>com.brunosimioni</groupId>
-	    <artifactId>ecommerce-platform</artifactId>
+	    <artifactId>orderfy</artifactId>
 	    <version>0.0.1-SNAPSHOT</version>
 	    <relativePath>../../pom.xml</relativePath>
     </parent>
 
-	<artifactId>customers-service</artifactId>
+	<artifactId>catalog-service</artifactId>
 
 	<dependencies>
 

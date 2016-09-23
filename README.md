@@ -1,12 +1,13 @@
-# ecommerce-platform
+# orderfy
 
-[![Build Status](https://travis-ci.org/brunosimioni/ecommerce-platform.svg?branch=master)](https://travis-ci.org/brunosimioni/ecommerce-platform)
-[![Coverage Status](https://coveralls.io/repos/github/brunosimioni/ecommerce-platform/badge.svg)](https://coveralls.io/github/brunosimioni/ecommerce-platform)
-[![Heroku](https://heroku-badge.herokuapp.com/?app=an-ecommerce-platform&style=flat&svg=1)](https://an-ecommerce-platform.herokuapp.com/index.html)
+[![Build Status](https://travis-ci.org/brunosimioni/orderfy.svg?branch=master)](https://travis-ci.org/brunosimioni/orderfy)
+[![Coverage Status](https://coveralls.io/repos/github/brunosimioni/orderfy/badge.svg)](https://coveralls.io/github/brunosimioni/orderfy)
 
-A simple proof-of-concept ecommerce platform
+A simple proof-of-technology for an ecommerce platform
 
 - Spring Boot 1.4.0 testing
 - Travis CI continuous integration
+- Coveralls for static analysis and code lint
 - Spring Cloud Netflix OSS
-- Kubernetes with Vangrant (mini-kube) local deployment
+- Docker Compose for local deployment
+- Kubernetes for cloud-native deployment
