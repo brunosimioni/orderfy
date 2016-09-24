@@ -17,12 +17,14 @@
 	<modules>
 		<module>backend-services/catalog-service</module>
 		<module>backend-services/customers-service</module>
+		<module>backend-services/checkout-service</module>
+		<module>toolbox/discovery-service</module>
 	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Camden.M1</spring-cloud.version>
+		<spring-cloud.version>Camden.RC1</spring-cloud.version>
 		<docker.plugin.version>0.4.12</docker.plugin.version>
 		<docker.image.prefix>orderfy</docker.image.prefix>
 	</properties>
@@ -78,6 +80,8 @@
 
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -117,7 +121,7 @@
 				<version>${docker.plugin.version}</version>
 				<configuration>
 					<imageName>brunosimioni/${docker.image.prefix}.${project.artifactId}</imageName>
-					<dockerDirectory>src/main/docker</dockerDirectory>
+					<dockerDirectory>/</dockerDirectory>
 					<serverId>docker-hub</serverId>
 					<useConfigFile>true</useConfigFile>
 					<resources>
