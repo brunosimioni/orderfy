@@ -1,0 +1,6 @@
+spring.application.name: checkout-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
