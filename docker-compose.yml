@@ -18,7 +18,11 @@ services:
 #      - "27017:27017"
 #    command: mongod --smallfiles
 #    
-  toolbox-discovery-service:
+
+
+## TOOLBOX
+
+  ds-toolbox-discovery-service:
     image: java:openjdk-8u91-jdk
     working_dir: /app
     volumes:
@@ -27,46 +31,47 @@ services:
     ports:
       - "9000:8080"
       
-  backend-catalog-service:
+## BACKEND
+
+  ds-backend-catalog-service:
     image: java:openjdk-8u91-jdk
     working_dir: /app
     volumes:
       - ./backend-services/catalog-service/target:/app
       - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 20 -s toolbox-discovery-service:8080 -- java -jar -Xmx64m -Xss256k /app/catalog-service.jar
+    command: /scripts/wait-for-it.sh -t 20 -s ds-toolbox-discovery-service:8080 -- java -jar -Xmx64m -Xss256k /app/catalog-service.jar
     environment:
-      eureka.client.serviceUrl.defaultZone: http://toolbox-discovery-service:8080/eureka
+      eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
     ports:
       - "9001:8080"
     depends_on:
-      - toolbox-discovery-service
+      - ds-toolbox-discovery-service
       
-  backend-customers-service:
-    image: java:openjdk-8u91-jdk
-    working_dir: /app
-    volumes:
-      - ./backend-services/customers-service/target:/app
-      - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 20 -s toolbox-discovery-service:8080 -- java -jar -Xmx64m -Xss256k /app/customers-service.jar
-    environment:
-      eureka.client.serviceUrl.defaultZone: http://toolbox-discovery-service:8080/eureka
-    ports:
-      - "9002:8080"
-    depends_on:
-      - toolbox-discovery-service
-      
-  backend-checkout-service:
-    image: java:openjdk-8u91-jdk
-    working_dir: /app
-    volumes:
-      - ./backend-services/checkout-service/target:/app
-      - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 20 -s toolbox-discovery-service:8080 -- java -jar -Xmx64m -Xss256k /app/checkout-service.jar
-    environment:
-      eureka.client.serviceUrl.defaultZone: http://toolbox-discovery-service:8080/eureka
-    ports:
-      - "9003:8080"
-    depends_on:
-      - toolbox-discovery-service
-      - backend-catalog-service
-      - backend-customers-service
+#  ds-backend-customers-service:
+#    image: java:openjdk-8u91-jdk
+#    working_dir: /app
+#    volumes:
+#      - ./backend-services/customers-service/target:/app
+#      - ./scripts:/scripts
+#    command: /scripts/wait-for-it.sh -t 20 -s ds-toolbox-discovery-service:8080 -- java -jar -Xmx64m -Xss256k /app/customers-service.jar
+#    environment:
+#      eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
+#    ports:
+#      - "9002:8080"
+#    depends_on:
+#      - ds-toolbox-discovery-service
+#      
+#  ds-backend-checkout-service:
+#    image: java:openjdk-8u91-jdk
+#    working_dir: /app
+#    volumes:
+#      - ./backend-services/checkout-service/target:/app
+#      - ./scripts:/scripts
+#    command: /scripts/wait-for-it.sh -t 20 -s ds-toolbox-discovery-service:8080 -- java -jar -Xmx64m -Xss256k /app/checkout-service.jar
+#    environment:
+#      eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
+#    ports:
+#      - "9003:8080"
+#    depends_on:
+#      - ds-toolbox-discovery-service
+#      - ds-backend-catalog-service
