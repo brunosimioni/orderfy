@@ -14,23 +14,16 @@ import search.repositories.SearchRepository;
 @RequestMapping("/search")
 public class SearchController {
 	
-//	@Data
-//	static class SuggestionRequest {
-//		public String userId;
-//		public String term;
-//	}
-//	
-//	@Data
-//	static class SuggestionResponse {
-//		public int count;
-//		public List<Suggestion> suggestions;
-//	}
-
 	@Autowired
     private SearchRepository searchRepository;
 
 	@RequestMapping(path = "suggestions", method = RequestMethod.POST)
 	public SuggResp.SuggRespMsg getTermSuggestion(@RequestBody SuggReq.SuggReqMsg req) {
 		return searchRepository.getSuggestions(req.getUserId(), req.getTerm());
+	}
+
+	@RequestMapping(path = "anysuggestion", method = RequestMethod.GET)
+	public SuggResp.SuggRespMsg getAnySuggestion() {
+		return searchRepository.getSuggestions("someid", "anyterm");
 	}
 }

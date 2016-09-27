@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/brunosimioni/orderfy.svg?branch=master)](https://travis-ci.org/brunosimioni/orderfy)
 [![Coverage Status](https://coveralls.io/repos/github/brunosimioni/orderfy/badge.svg)](https://coveralls.io/github/brunosimioni/orderfy)
 
+# Proof-of-technology
+
 A simple proof-of-technology for an ecommerce platform. This is a currently work-in-progress, composed by following techs:
 
 ### Foundation && CI
@@ -38,9 +40,19 @@ A simple proof-of-technology for an ecommerce platform. This is a currently work
 - traffic-generator: A simple random traffic generator for orderfy platform
 - scripts: Build and run tools
 
+
+# Application Modules [wip]
+
+- backend-modules/catalog-service: a wrapper service to [Akeneo PIM](https://www.akeneo.com/)
+- backend-modules/checkout-service: a simple cart&checkout service by consuming discovery services
+- backend-modules/customers-service: a customer-oriented MDM
+- backend-modules/search-service: a thin Elastic-search wrapper, enabled by [Protobuf](https://github.com/google/protobuf) protocol
+- toolbox-modules/discovery-service: a instance of Netflix OSS Eureka
+
 ## Run it
 1. docker-compose up
 2. Spring Cloud Eureka: http://localhost:9000/
 3. Orderfy Backend Catalog Service: http://localhost:9001/
 4. Orderfy Backend Customers Service: http://localhost:9002/
 5. Orderfy Backend Checkout Service: http://localhost:9003/
+6. Orderfy Backend Search Service: http://localhost:9004/

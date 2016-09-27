@@ -75,3 +75,17 @@ services:
 #    depends_on:
 #      - ds-toolbox-discovery-service
 #      - ds-backend-catalog-service
+
+  ds-backend-search-service:
+    image: java:openjdk-8u91-jdk
+    working_dir: /app
+    volumes:
+      - ./backend-modules/search-service/target:/app
+      - ./scripts:/scripts
+    command: /scripts/wait-for-it.sh -t 20 -s ds-toolbox-discovery-service:8080 -- java -jar -Xmx64m -Xss256k /app/search-service.jar
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
+    ports:
+      - "9003:8080"
+    depends_on:
+      - ds-toolbox-discovery-service
