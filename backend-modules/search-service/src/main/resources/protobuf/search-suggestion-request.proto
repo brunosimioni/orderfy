@@ -1,0 +1,9 @@
+syntax = "proto3";
+package search;
+option java_package = "search.controllers.protobuf";
+option java_outer_classname = "SuggReq";
+ 
+message SuggReqMsg {
+    string user_id = 1;
+    string term = 2;
+}

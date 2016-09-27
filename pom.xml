@@ -18,6 +18,7 @@
 		<module>backend-modules/catalog-service</module>
 		<module>backend-modules/customers-service</module>
 		<module>backend-modules/checkout-service</module>
+		<module>backend-modules/search-service</module>
 		<module>toolbox-modules/discovery-service</module>
 	</modules>
 

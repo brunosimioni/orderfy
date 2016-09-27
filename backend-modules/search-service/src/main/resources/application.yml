@@ -1,0 +1,13 @@
+spring.application.name: search-service
+
+spring:
+  cloud:
+      ignoredInterfaces:
+        - lo*
+        
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/

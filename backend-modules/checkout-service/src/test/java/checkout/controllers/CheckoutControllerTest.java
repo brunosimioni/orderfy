@@ -1,4 +1,4 @@
-package checkout.gateway;
+package checkout.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,4 +1,4 @@
-package customers.gateway;
+package catalog.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,10 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import catalog.entities.Product;
+
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 
-public class CustomersControllerTest {
+public class CatalogControllerTest {
 
 	@Autowired
 	private TestRestTemplate restTemplate;
@@ -21,10 +24,10 @@ public class CustomersControllerTest {
 	@Test
 	public void test() {
 
-		CustomerDTO[] customers = this.restTemplate.getForObject("/customers", CustomerDTO[].class);
-		CustomerDTO[] expectedCustomers = new CustomerDTO[1];
-		expectedCustomers[0] = new CustomerDTO(1, "John", "Jones");
+		Product[] catalog = this.restTemplate.getForObject("/catalog", Product[].class);
+		Product[] expectedCatalog = new Product[1];
+		expectedCatalog[0] = new Product(1, "Product 1", "Category A");
 
-		assertThat(customers).isEqualTo(expectedCustomers);
+		assertThat(catalog).isEqualTo(expectedCatalog);
 	}
 }

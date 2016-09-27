@@ -1,4 +1,4 @@
-package catalog.gateway;
+package customers.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,16 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import customers.entities.Customer;
+
 @RestController
-@RequestMapping("/catalog")
-public class CatalogController {
+@RequestMapping("/customers")
+public class CustomersController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
-	public List<ProductDTO> getAllProducts() {
+	public List<Customer> getAllCustomers() {
 
-		List<ProductDTO> products = new ArrayList<ProductDTO>();
-		products.add(new ProductDTO(1, "Product 1", "Category A"));
+		List<Customer> customers = new ArrayList<Customer>();
+		customers.add(new Customer(1, "John", "Jones"));
 
-		return products;
+		return customers;
 	}
 }

@@ -1,17 +1,17 @@
-package catalog.gateway;
+package catalog.entities;
 
 import lombok.Data;
 
 @Data
-public class ProductDTO {
+public class Product {
 	public Integer id;
 	public String name;
 	public String category;
 
-	public ProductDTO() {
+	public Product() {
 	};
 
-	public ProductDTO(Integer id, String name, String category) {
+	public Product(Integer id, String name, String category) {
 		this.id = id;
 		this.name = name;
 		this.category = category;

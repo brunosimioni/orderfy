@@ -1,0 +1,14 @@
+syntax = "proto3";
+package search;
+option java_package = "search.controllers.protobuf";
+option java_outer_classname = "SuggResp";
+ 
+message SuggRespMsg {
+    int32 count = 1;
+    
+    message Suggestion {
+        string content = 1;
+    }
+    
+    repeated Suggestion suggestions = 2;
+}

@@ -1,22 +1,22 @@
-package checkout.usecase;
+package checkout.usecases;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import checkout.entities.ProductDTO;
-import checkout.gateway.CatalogClient;
+import checkout.entities.Product;
+import checkout.repositories.CatalogRepository;
 
 @Component
 public class PlaceOrderUseCase {
 
 	@Autowired
-	CatalogClient catalogClient;
+	CatalogRepository catalogClient;
 	
-	public List<ProductDTO> placesAnOrder() {
+	public List<Product> placesAnOrder() {
 		
-		List<ProductDTO> products = catalogClient.getProducts();
+		List<Product> products = catalogClient.getProducts();
 		products.forEach(o -> System.out.println(o.toString()));
 		
 		return products;

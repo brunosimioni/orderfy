@@ -1,17 +1,17 @@
-package customers.gateway;
+package customers.entities;
 
 import lombok.Data;
 
 @Data
-public class CustomerDTO {
+public class Customer {
 	public Integer id;
 	public String firstName;
 	public String lastName;
 
-	public CustomerDTO() {
+	public Customer() {
 	};
 
-	public CustomerDTO(Integer id, String firstName, String lastName) {
+	public Customer(Integer id, String firstName, String lastName) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;

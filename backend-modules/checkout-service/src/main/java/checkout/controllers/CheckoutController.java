@@ -1,4 +1,4 @@
-package checkout.gateway;
+package checkout.controllers;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import checkout.entities.ProductDTO;
-import checkout.usecase.PlaceOrderUseCase;
+import checkout.entities.Product;
+import checkout.usecases.PlaceOrderUseCase;
 
 @RestController
 @RequestMapping("/checkout")
@@ -18,7 +18,7 @@ public class CheckoutController {
 	PlaceOrderUseCase placeOrderUseCase;
 	
 	@RequestMapping(path="placeorder", method = RequestMethod.POST, produces = "application/json")
-	public List<ProductDTO> placeOrder() {
+	public List<Product> placeOrder() {
 		return placeOrderUseCase.placesAnOrder();
 	}
 }
