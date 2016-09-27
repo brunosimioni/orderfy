@@ -1,0 +1,13 @@
+spring.application.name: catalog-service
+
+spring:
+  cloud:
+      ignoredInterfaces:
+        - lo*
+        
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/

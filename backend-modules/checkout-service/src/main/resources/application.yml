@@ -1,0 +1,11 @@
+spring.application.name: checkout-service
+
+#logging:
+#  level:
+#    com.netflix.discovery: 'DEBUG'
+#    org.springframework.cloud: 'DEBUG'
+    
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/

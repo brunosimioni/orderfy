@@ -15,10 +15,10 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>backend-services/catalog-service</module>
-		<module>backend-services/customers-service</module>
-		<module>backend-services/checkout-service</module>
-		<module>toolbox/discovery-service</module>
+		<module>backend-modules/catalog-service</module>
+		<module>backend-modules/customers-service</module>
+		<module>backend-modules/checkout-service</module>
+		<module>toolbox-modules/discovery-service</module>
 	</modules>
 
 	<properties>
