@@ -31,28 +31,28 @@ A simple proof-of-technology for an ecommerce platform. This is a currently work
 - Kubernetes for cloud-native deployment [partially done]
 
 ## Basic project organization
-- backend-modules: Backend modules for orderfy platform
-- frontend-modules: Frontend modules for orderfy platform
-- tpsource-modules: 3rd-party modules as source of external integrations
-- insights-modules: Insights and analytics modules for orderfy platform
-- quality-modules: Following Testing microservices by Martin Fowler
-- toolbox-modules: Toolbox and common modules to keep orderfy up&running
-- traffic-generator: A simple random traffic generator for orderfy platform
-- scripts: Build and run tools
+- `backend-modules`: Backend modules for orderfy platform
+- `frontend-modules`: Frontend modules for orderfy platform
+- `tpsource-modules`: 3rd-party modules as source of external integrations
+- `insights-modules`: Insights and analytics modules for orderfy platform
+- `quality-modules`: Following Testing microservices by Martin Fowler
+- `toolbox-modules`: Toolbox and common modules to keep orderfy up&running
+- `traffic-generator`: A simple random traffic generator for orderfy platform
+- `scripts`: Build and run tools
 
 
 # Application Modules [wip]
 
-- backend-modules/catalog-service: a wrapper service to [Akeneo PIM](https://www.akeneo.com/)
-- backend-modules/checkout-service: a simple cart&checkout service by consuming discovery services
-- backend-modules/customers-service: a customer-oriented MDM
-- backend-modules/search-service: a thin Elastic-search wrapper, enabled by [Protobuf](https://github.com/google/protobuf) protocol
-- toolbox-modules/discovery-service: a instance of Netflix OSS Eureka
+- `backend-modules/catalog-service`: a wrapper service to [Akeneo PIM](https://www.akeneo.com/)
+- `backend-modules/checkout-service`: a simple cart&checkout service by consuming discovery services
+- `backend-modules/customers-service`: a customer-oriented MDM
+- `backend-modules/search-service`: a thin Elastic-search wrapper, enabled by [Protobuf](https://github.com/google/protobuf) protocol
+- `toolbox-modules/discovery-service`: a instance of Netflix OSS Eureka
 
 ## Run it
 1. docker-compose up
-2. Spring Cloud Eureka: http://localhost:9000/
-3. Orderfy Backend Catalog Service: http://localhost:9001/
-4. Orderfy Backend Customers Service: http://localhost:9002/
-5. Orderfy Backend Checkout Service: http://localhost:9003/
-6. Orderfy Backend Search Service: http://localhost:9004/
+2. Spring Cloud Eureka: `http://localhost:9000/`
+3. Orderfy Backend Catalog Service: `http://localhost:9001/`
+4. Orderfy Backend Customers Service: `http://localhost:9002/`
+5. Orderfy Backend Checkout Service: `http://localhost:9003/`
+6. Orderfy Backend Search Service: `http://localhost:9004/`
