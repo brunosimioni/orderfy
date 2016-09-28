@@ -8,4 +8,4 @@ spring.application.name: checkout-service
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:9000/eureka/
+      defaultZone: http://localhost:8001/eureka/

@@ -40,7 +40,6 @@ A simple proof-of-technology for an ecommerce platform. This is a currently work
 - `traffic-generator`: A simple random traffic generator for orderfy platform
 - `scripts`: Build and run tools
 
-
 # Application Modules [wip]
 
 - `backend-modules/catalog-service`: a wrapper service to [Akeneo PIM](https://www.akeneo.com/)
@@ -50,9 +49,15 @@ A simple proof-of-technology for an ecommerce platform. This is a currently work
 - `toolbox-modules/discovery-service`: a instance of Netflix OSS Eureka
 
 ## Run it
-1. docker-compose up
-2. Spring Cloud Eureka: `http://localhost:9000/`
-3. Orderfy Backend Catalog Service: `http://localhost:9001/`
-4. Orderfy Backend Customers Service: `http://localhost:9002/`
-5. Orderfy Backend Checkout Service: `http://localhost:9003/`
-6. Orderfy Backend Search Service: `http://localhost:9004/`
+1. mvn clean install
+2. docker-compose up
+
+## Inspect it
+- Spring Cloud Zuul (API Gateway): `http://localhost:8000/`
+- Spring Cloud Zuul Routes (API Gateway): `http://localhost:8000/routes`
+- Spring Cloud Eureka: `http://localhost:8001/`
+- Orderfy Backend Catalog Service: `http://localhost:9000/`
+- Orderfy Backend Customers Service: `http://localhost:9001/`
+- Orderfy Backend Checkout Service: `http://localhost:9002/`
+- Orderfy Backend Checkout Hystrix Dashboard: `http://localhost:9002/hystrix/monitor?stream=http%3A%2F%2Flocalhost%3A9002%2Fhystrix.stream`
+- Orderfy Backend Search Service: `http://localhost:9003/`

@@ -20,6 +20,7 @@
 		<module>backend-modules/checkout-service</module>
 		<module>backend-modules/search-service</module>
 		<module>toolbox-modules/discovery-service</module>
+		<module>toolbox-modules/apigateway-service</module>  
 	</modules>
 
 	<properties>
