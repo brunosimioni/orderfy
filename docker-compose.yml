@@ -34,6 +34,7 @@ services:
     ports:
       - "8000:8080"
       - "8100:3333"
+      - "8200:3334"
     depends_on:
       - ds-toolbox-discovery-service
 
@@ -46,6 +47,7 @@ services:
     ports:
       - "8001:8080"
       - "8101:3333"
+      - "8201:3334"
 ## BACKEND
 
   ds-backend-catalog-service:
