@@ -28,12 +28,11 @@ services:
     volumes:
       - ./toolbox-modules/apigateway-service/target:/app
       - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh /app/apigateway-service.jar
+    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 512 /app/apigateway-service.jar
     environment:
       eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
     ports:
       - "8000:8080"
-      - "8100:3333"
     depends_on:
       - ds-toolbox-discovery-service
 
@@ -42,10 +41,10 @@ services:
     working_dir: /app
     volumes:
       - ./toolbox-modules/discovery-service/target:/app
-    command: java -jar -Xmx64m -Xss256k /app/discovery-service.jar
+      - ./scripts:/scripts
+    command: /scripts/run-spring-boot.sh 64 /app/discovery-service.jar
     ports:
       - "8001:8080"
-      - "8101:3333"
 ## BACKEND
 
   ds-backend-catalog-service:
@@ -54,12 +53,11 @@ services:
     volumes:
       - ./backend-modules/catalog-service/target:/app
       - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh /app/catalog-service.jar
+    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 128 /app/catalog-service.jar
     environment:
       eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
     ports:
       - "9000:8080"
-      - "9100:3333"
     depends_on:
       - ds-toolbox-discovery-service
       
@@ -69,12 +67,11 @@ services:
     volumes:
       - ./backend-modules/customers-service/target:/app
       - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh /app/customers-service.jar
+    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 128 /app/customers-service.jar
     environment:
       eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
     ports:
       - "9001:8080"
-      - "9101:3333"
     depends_on:
       - ds-toolbox-discovery-service
       
@@ -84,12 +81,11 @@ services:
     volumes:
       - ./backend-modules/checkout-service/target:/app
       - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh /app/checkout-service.jar
+    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 128 /app/checkout-service.jar
     environment:
       eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
     ports:
       - "9002:8080"
-      - "9102:3333"
     depends_on:
       - ds-toolbox-discovery-service
       - ds-backend-catalog-service
@@ -100,11 +96,10 @@ services:
     volumes:
       - ./backend-modules/search-service/target:/app
       - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh /app/search-service.jar
+    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 128 /app/search-service.jar
     environment:
       eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
     ports:
       - "9003:8080"
-      - "9103:3333"
     depends_on:
       - ds-toolbox-discovery-service
