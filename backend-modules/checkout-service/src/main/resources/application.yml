@@ -1,5 +1,5 @@
 debug: true
-
+server.port: 8081
 spring.application.name: checkout-service
 
 spring:
