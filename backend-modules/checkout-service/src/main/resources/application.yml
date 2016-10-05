@@ -1,11 +1,15 @@
+debug: true
+
 spring.application.name: checkout-service
 
-#logging:
-#  level:
-#    com.netflix.discovery: 'DEBUG'
-#    org.springframework.cloud: 'DEBUG'
-    
+spring:
+  cloud:
+      ignoredInterfaces:
+        - lo*
+        
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
     serviceUrl:
       defaultZone: http://localhost:8001/eureka/

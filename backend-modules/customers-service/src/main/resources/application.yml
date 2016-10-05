@@ -1,6 +1,12 @@
 spring.application.name: customers-service
 
+spring:
+  cloud:
+      ignoredInterfaces:
+        - lo*
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
     serviceUrl:
       defaultZone: http://localhost:8001/eureka/

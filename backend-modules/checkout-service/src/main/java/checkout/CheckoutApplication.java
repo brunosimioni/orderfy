@@ -7,10 +7,13 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableCircuitBreaker
+@EnableSwagger2
 @EnableHystrixDashboard
 public class CheckoutApplication {
 

@@ -1,9 +1,14 @@
 spring.application.name: discovery-service
 
+spring:
+  cloud:
+      ignoredInterfaces:
+        - lo*
 eureka:
   password: password
   instance:
     leaseRenewalIntervalInSeconds: 10
+    prefer-ip-address: true
     metadataMap:
       instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
   client:

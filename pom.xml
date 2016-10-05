@@ -21,12 +21,13 @@
 		<module>backend-modules/search-service</module>
 		<module>toolbox-modules/discovery-service</module>
 		<module>toolbox-modules/apigateway-service</module>
+		<module>toolbox-modules/circuit-monitor-service</module>
 	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Camden.RC1</spring-cloud.version>
+		<spring-cloud.version>Brixton.SR6</spring-cloud.version>
 		<docker.plugin.version>0.4.12</docker.plugin.version>
 		<docker.image.prefix>orderfy</docker.image.prefix>
 	</properties>
@@ -44,6 +45,22 @@
 	</dependencyManagement>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>

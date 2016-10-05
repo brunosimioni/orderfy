@@ -11,12 +11,13 @@ A simple proof-of-technology for an ecommerce platform. This is a currently work
 - Spring Boot 1.4.0 testing [done]
 - Travis CI continuous integration [done]
 - Coveralls for static analysis and code lint [partially done]
-- Spring Cloud Netflix OSS (Eureka, Hystrix, Feign, Zuul, etc) [partially done]
-- Clean Architecture [partially-done]
-- Google Protobuf Protocol [not started yet]
+- Spring Cloud Netflix OSS (Eureka, Hystrix, Turbine, Feign, Zuul, Configuration, etc) [partially done]
+- Clean Architecture [done]
+- Google Protobuf Protocol [done]
+- Swagger API documentation with Spring Fox
 
 ### Testing
-- Gatling [not started yet]
+- Gatling [done]
 
 ### Data Mining
 - Apache Kafka [not started yet]
@@ -43,10 +44,13 @@ A simple proof-of-technology for an ecommerce platform. This is a currently work
 # Application Modules [wip]
 
 - `backend-modules/catalog-service`: a wrapper service to [Akeneo PIM](https://www.akeneo.com/)
-- `backend-modules/checkout-service`: a simple cart&checkout service by consuming discovery services
+- `backend-modules/checkout-service`: a simple cart&checkout service by consuming discovery services, powered by hystrix circuit-breakers, monitoring and API documentation
 - `backend-modules/customers-service`: a customer-oriented MDM
 - `backend-modules/search-service`: a thin Elastic-search wrapper, enabled by [Protobuf](https://github.com/google/protobuf) protocol
-- `toolbox-modules/discovery-service`: a instance of Netflix OSS Eureka
+- `toolbox-modules/discovery-service`: Netflix OSS Eureka service discovery server
+- `toolbox-modules/apigateway-service`: Netflix OSS Zuul API Gateway
+- `toolbox-modules/circuit-monitor-service`: Netflix OSS Turbine (Hystrix aggregator monitor)
+- `traffic-generator`: Gatling Framework (Akka / Play / Scala) powered stress tests
 
 ## Run it
 1. mvn clean install
@@ -59,5 +63,6 @@ A simple proof-of-technology for an ecommerce platform. This is a currently work
 - Orderfy Backend Catalog Service: `http://localhost:9000/`
 - Orderfy Backend Customers Service: `http://localhost:9001/`
 - Orderfy Backend Checkout Service: `http://localhost:9002/`
-- Orderfy Backend Checkout Hystrix Dashboard: `http://localhost:9002/hystrix/monitor?stream=http%3A%2F%2Flocalhost%3A9002%2Fhystrix.stream`
+- Orderfy Backend Checkout Service Swagger 2.0 docs: `http://localhost:9002/v2/api-docs`
+- Orderfy Backend Checkout Service Swagger UI: `http://localhost:9002/swagger-ui.html`
 - Orderfy Backend Search Service: `http://localhost:9003/`
