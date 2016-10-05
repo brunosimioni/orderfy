@@ -3,6 +3,7 @@ package checkout.repositories;
 import java.util.List;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import checkout.entities.Customer;
 import checkout.repositories.CustomersRepository.CustomersRepositoryFallback;
 
-@FeignClient(name="customers-service", path="/customers", configuration = FeignClientConfiguration.class, fallback = CustomersRepositoryFallback.class)
+@FeignClient(name="customers-service", path="/customers", fallback = CustomersRepositoryFallback.class)
 public interface CustomersRepository {
 
     @RequestMapping(method = RequestMethod.GET)
@@ -19,6 +20,7 @@ public interface CustomersRepository {
     @RequestMapping(path="{id}", method = RequestMethod.GET)
     Customer getCustomer(@PathVariable("id") int id);
     
+    @Component
     static class CustomersRepositoryFallback implements CustomersRepository {
 
 		@Override

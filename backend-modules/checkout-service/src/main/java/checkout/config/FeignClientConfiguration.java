@@ -1,22 +1,21 @@
-package checkout.repositories;
+package checkout.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-import feign.Feign;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 
-@Component
+@Configuration
 public class FeignClientConfiguration {
 
 	private static final Logger logger = LoggerFactory.getLogger(FeignClientConfiguration.class);
 	
 	@Bean
-	public Feign.Builder feignBuilder() {
-		return Feign.builder().errorDecoder(new FeignCustomErrorDecoder());
+	public ErrorDecoder customErrorDecoder() {
+		return new FeignCustomErrorDecoder();
 	}
 	
 	class FeignCustomErrorDecoder implements ErrorDecoder {

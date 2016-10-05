@@ -27,7 +27,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Brixton.SR6</spring-cloud.version>
+		<spring-cloud.version>Camden.RELEASE</spring-cloud.version>
 		<docker.plugin.version>0.4.12</docker.plugin.version>
 		<docker.image.prefix>orderfy</docker.image.prefix>
 	</properties>
