@@ -37,12 +37,12 @@ class BasicSimulation extends Simulation {
 
     val checkout = exec(http("PlaceOrder")
         .post("/checkout-service/checkout/placeorder")
+        .body(StringBody("""{"idsProducts":[1,2,3],"idCustomer":5}""")).asJSON
     )
   }
     
   val httpConf = http
-//    .baseURL("http://206d65fd.ngrok.io")
-    .baseURL("http://localhost:8000")
+    .baseURL("http://nssp:8000")
     .acceptHeader("text/html,application/xhtml+xml,application/xml,application/json;q=0.9,*/*;q=0.8")
     .doNotTrackHeader("1")
     .acceptLanguageHeader("en-US,en;q=0.5")
