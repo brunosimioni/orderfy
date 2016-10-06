@@ -55,13 +55,17 @@ class BasicSimulation extends Simulation {
   setUp(
     frontend.inject(
       atOnceUsers(1),
-      constantUsersPerSec(10) during(10 seconds) randomized
-//      nothingFor(4 seconds),
-//      rampUsersPerSec(50) to(100) during(5) randomized
+      constantUsersPerSec(20) during(100 seconds) randomized,
+      heavisideUsers(3000) over(20 seconds),
+      nothingFor(30 seconds),
+      constantUsersPerSec(20) during(300 seconds) randomized
     ),
     searchers.inject(
       atOnceUsers(1),
-      constantUsersPerSec(50) during(10 seconds) randomized
+      constantUsersPerSec(50) during(100 seconds) randomized,
+      heavisideUsers(6000) over(20 seconds),
+      nothingFor(30 seconds),
+      constantUsersPerSec(50) during(300 seconds) randomized
     )
   ).protocols(httpConf)
 
