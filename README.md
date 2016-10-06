@@ -11,7 +11,14 @@ A simple proof-of-technology for an ecommerce platform. This is a currently work
 - Spring Boot 1.4.0 testing [done]
 - Travis CI continuous integration [done]
 - Coveralls for static analysis and code lint [partially done]
-- Spring Cloud Netflix OSS (Eureka, Hystrix, Turbine, Feign, Zuul, Configuration, etc) [partially done]
+- Spring Cloud Netflix OSS
+   - Eureka: client-side service discovery [done] 
+   - Hystrix: circuit breaker implementation [done]
+   - Turbine: circuit breaker monitoring aggregation [done]
+   - Feign: Rest serivce consumption [done]
+   - Zuul: API gateway [done]
+   - Configuration: externalized and centralized configuration by using git [not started yet]
+   - Stream: amqp messaging streaming [done]
 - Clean Architecture [done]
 - Google Protobuf Protocol [done]
 - Swagger API documentation with Spring Fox
@@ -23,9 +30,9 @@ A simple proof-of-technology for an ecommerce platform. This is a currently work
 - Apache Kafka [not started yet]
 - Apache Spark [not started yet]
 
-### Data Storage
+### Data Storage and processing
 - Apache Cassandra [not started yet]
-- RabbitMQ [partially done]
+- RabbitMQ []
 - Redis [partially done]
 - MongoDB [partially done]
 - Docker Compose for local deployment with wait-for-it dependencies [done]
@@ -49,7 +56,8 @@ A simple proof-of-technology for an ecommerce platform. This is a currently work
 - `backend-modules/search-service`: a thin Elastic-search wrapper, enabled by [Protobuf](https://github.com/google/protobuf) protocol
 - `toolbox-modules/discovery-service`: Netflix OSS Eureka service discovery server
 - `toolbox-modules/apigateway-service`: Netflix OSS Zuul API Gateway
-- `toolbox-modules/circuit-monitor-service`: Netflix OSS Turbine (Hystrix aggregator monitor)
+- `toolbox-modules/circuitmonitor-service`: Netflix OSS Turbine (Hystrix aggregator monitor)
+- `toolbox-modules/circuitmonitor-service`: Netflix OSS Turbine (Hystrix aggregator monitor)
 - `traffic-generator`: Gatling Framework (Akka / Play / Scala) powered stress tests
 
 ## Run it
@@ -60,6 +68,8 @@ A simple proof-of-technology for an ecommerce platform. This is a currently work
 - Spring Cloud Zuul (API Gateway): `http://localhost:8000/`
 - Spring Cloud Zuul Routes (API Gateway): `http://localhost:8000/routes`
 - Spring Cloud Eureka: `http://localhost:8001/`
+- Spring Cloud Turbine: `http://localhost:8002/hystrix/monitor?stream=http%3A%2F%2Flocalhost%3A8903%2Fturbine.stream`
+- RabbitMQ exchanges and queues: `http://localhost:15672/` [guest:guest]
 - Orderfy Backend Catalog Service: `http://localhost:9000/`
 - Orderfy Backend Customers Service: `http://localhost:9001/`
 - Orderfy Backend Checkout Service: `http://localhost:9002/`

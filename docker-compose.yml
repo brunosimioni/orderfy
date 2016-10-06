@@ -31,10 +31,12 @@ services:
     command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 64 /app/apigateway-service.jar
     environment:
       eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
+      spring.rabbitmq.addresses: rabbitmq:5672
     ports:
       - "8000:8080"
     depends_on:
       - ds-toolbox-discovery-service
+      - rabbitmq
 
   ds-toolbox-discovery-service:
     image: java:openjdk-8u91-jdk
@@ -45,6 +47,38 @@ services:
     command: /scripts/run-spring-boot.sh 64 /app/discovery-service.jar
     ports:
       - "8001:8080"
+
+  ds-toolbox-circuitmonitor-service:
+    image: java:openjdk-8u91-jdk
+    working_dir: /app
+    volumes:
+      - ./toolbox-modules/circuitmonitor-service/target:/app
+      - ./scripts:/scripts
+    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 64 /app/circuitmonitor-service.jar
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
+      spring.rabbitmq.addresses: rabbitmq:5672
+    ports:
+      - "8002:8080"
+      - "8989:8989"
+    depends_on:
+      - ds-toolbox-discovery-service
+      - rabbitmq
+
+  ds-toolbox-instancesadmin-service:
+    image: java:openjdk-8u91-jdk
+    working_dir: /app
+    volumes:
+      - ./toolbox-modules/instancesadmin-service/target:/app
+      - ./scripts:/scripts
+    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 64 /app/instancesadmin-service.jar
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
+    ports:
+      - "8003:8080"
+    depends_on:
+      - ds-toolbox-discovery-service
+
 ## BACKEND
 
   ds-backend-catalog-service:
@@ -84,11 +118,14 @@ services:
     command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 64 /app/checkout-service.jar
     environment:
       eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
+      spring.rabbitmq.addresses: rabbitmq:5672
     ports:
       - "9002:8080"
     depends_on:
       - ds-toolbox-discovery-service
       - ds-backend-catalog-service
+      - ds-backend-customers-service
+      - rabbitmq
 
   ds-backend-search-service:
     image: java:openjdk-8u91-jdk

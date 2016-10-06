@@ -1,6 +1,6 @@
 spring:
   application:
-    name: circuit-monitor-service
+    name: circuitmonitor-service
   cloud:
     ignoredInterfaces:
       - lo*

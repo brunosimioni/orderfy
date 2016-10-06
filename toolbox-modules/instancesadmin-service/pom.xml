@@ -10,20 +10,18 @@
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>circuit-monitor-service</artifactId>
+	<artifactId>instancesadmin-service</artifactId>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-turbine-stream</artifactId>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-server</artifactId>
+			<version>1.4.2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-server-ui</artifactId>
+			<version>1.4.2</version>
 		</dependency>
-		<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
-        </dependency>
 	</dependencies>
 </project>
