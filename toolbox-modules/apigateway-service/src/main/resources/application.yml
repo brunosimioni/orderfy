@@ -1,17 +1,13 @@
-spring.application.name: apigateway-service
-
 spring:
+  application:
+    name: apigateway-service
   cloud:
-      ignoredInterfaces:
-        - lo*
-  rabbitmq:
-    addresses: localhost:5672
-    username: guest
-    password: guest
-    
+    ignoredInterfaces:
+      - lo*
+
 eureka:
   instance:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://localhost:8001/eureka/
+      defaultZone: http://localhost:8001/eureka

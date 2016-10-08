@@ -1,17 +1,17 @@
-spring.application.name: checkout-service
+orderfy:
+  orders:
+    exchange-name: orderfy-orders-exchange
 
 spring:
+  application:
+    name: checkout-service
   cloud:
-      ignoredInterfaces:
-        - lo*
-  rabbitmq:
-    addresses: localhost:5672
-    username: guest
-    password: guest
+    ignoredInterfaces:
+      - lo*
 
 eureka:
   instance:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://localhost:8001/eureka/
+      defaultZone: http://localhost:8001/eureka

@@ -68,7 +68,7 @@ A simple proof-of-technology for an ecommerce platform. This is a currently work
 - Spring Cloud Zuul (API Gateway): `http://localhost:8000/`
 - Spring Cloud Zuul Routes (API Gateway): `http://localhost:8000/routes`
 - Spring Cloud Eureka: `http://localhost:8001/`
-- Spring Cloud Turbine: `http://localhost:8002/hystrix/monitor?stream=http%3A%2F%2Flocalhost%3A8903%2Fturbine.stream`
+- Spring Cloud Turbine: `http://localhost:8002/hystrix/monitor?stream=http%3A%2F%2Flocalhost%3A8989%2Fturbine.stream`
 - RabbitMQ exchanges and queues: `http://localhost:15672/` [guest:guest]
 - Orderfy Backend Catalog Service: `http://localhost:9000/`
 - Orderfy Backend Customers Service: `http://localhost:9001/`

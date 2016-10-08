@@ -4,12 +4,12 @@ spring:
   cloud:
     ignoredInterfaces:
       - lo*
-    config:
-      uri: ${vcap.services.${PREFIX:}configserver.credentials.uri:http://user:password@localhost:8888}
+  config:
+      uri: http://localhost:8004
 
 eureka:
   instance:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://localhost:8001/eureka/
+      defaultZone: http://localhost:8001/eureka

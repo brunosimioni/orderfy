@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: circuitmonitor-service
+  cloud:
+    stream:
+      binders:
+        rabbit1:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: rabbitmq
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://ds-toolbox-discovery-service:8080/eureka/

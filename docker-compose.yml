@@ -28,13 +28,15 @@ services:
     volumes:
       - ./toolbox-modules/apigateway-service/target:/app
       - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 64 /app/apigateway-service.jar
+      - ./newrelic:/newrelic
+    command: /scripts/wait-for-config-and-discovery.sh /scripts/run-spring-boot.sh 128 apigateway-service.jar apigateway-service.yml
     environment:
-      eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
-      spring.rabbitmq.addresses: rabbitmq:5672
+      SPRING_CLOUD_CONFIG_URI: http://ds-toolbox-config-service:8080
+      NEW_RELIC_LICENSE_KEY: ${NRLK}
     ports:
       - "8000:8080"
     depends_on:
+      - ds-toolbox-config-service
       - ds-toolbox-discovery-service
       - rabbitmq
 
@@ -44,9 +46,15 @@ services:
     volumes:
       - ./toolbox-modules/discovery-service/target:/app
       - ./scripts:/scripts
-    command: /scripts/run-spring-boot.sh 64 /app/discovery-service.jar
+      - ./newrelic:/newrelic
+    command: /scripts/wait-for-it.sh -t 60 -s ds-toolbox-config-service:8080 -- /scripts/run-spring-boot.sh 90 discovery-service.jar discovery-service.yml
+    environment:
+      SPRING_CLOUD_CONFIG_URI: http://ds-toolbox-config-service:8080
+      NEW_RELIC_LICENSE_KEY: ${NRLK}
     ports:
       - "8001:8080"
+    depends_on:
+      - ds-toolbox-config-service
 
   ds-toolbox-circuitmonitor-service:
     image: java:openjdk-8u91-jdk
@@ -54,14 +62,16 @@ services:
     volumes:
       - ./toolbox-modules/circuitmonitor-service/target:/app
       - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 64 /app/circuitmonitor-service.jar
+      - ./newrelic:/newrelic
+    command: /scripts/wait-for-config-and-discovery.sh /scripts/run-spring-boot.sh 90 circuitmonitor-service.jar circuitmonitor-service.yml
     environment:
-      eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
-      spring.rabbitmq.addresses: rabbitmq:5672
+      SPRING_CLOUD_CONFIG_URI: http://ds-toolbox-config-service:8080
+      NEW_RELIC_LICENSE_KEY: ${NRLK}
     ports:
       - "8002:8080"
       - "8989:8989"
     depends_on:
+      - ds-toolbox-config-service
       - ds-toolbox-discovery-service
       - rabbitmq
 
@@ -71,13 +81,31 @@ services:
     volumes:
       - ./toolbox-modules/instancesadmin-service/target:/app
       - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 64 /app/instancesadmin-service.jar
+      - ./newrelic:/newrelic
+    command: /scripts/wait-for-config-and-discovery.sh /scripts/run-spring-boot.sh 90 instancesadmin-service.jar instancesadmin-service.yml
     environment:
-      eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
+      SPRING_CLOUD_CONFIG_URI: http://ds-toolbox-config-service:8080
+      NEW_RELIC_LICENSE_KEY: ${NRLK}
     ports:
       - "8003:8080"
     depends_on:
+      - ds-toolbox-config-service
       - ds-toolbox-discovery-service
+
+  ds-toolbox-config-service:
+    image: java:openjdk-8u91-jdk
+    working_dir: /app
+    volumes:
+      - ./toolbox-modules/config-service/target:/app
+      - ./scripts:/scripts
+      - ./newrelic:/newrelic
+      - ./configs:/configs
+    command: /scripts/run-spring-boot.sh 90 config-service.jar config-service.yml
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
+      NEW_RELIC_LICENSE_KEY: ${NRLK}
+    ports:
+      - "8004:8080"
 
 ## BACKEND
 
@@ -87,41 +115,49 @@ services:
     volumes:
       - ./backend-modules/catalog-service/target:/app
       - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 64 /app/catalog-service.jar
+      - ./newrelic:/newrelic
+    command: /scripts/wait-for-config-and-discovery.sh /scripts/run-spring-boot.sh 90 catalog-service.jar catalog-service.yml
     environment:
-      eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
+      SPRING_CLOUD_CONFIG_URI: http://ds-toolbox-config-service:8080
+      NEW_RELIC_LICENSE_KEY: ${NRLK}
     ports:
       - "9000:8080"
     depends_on:
+      - ds-toolbox-config-service
       - ds-toolbox-discovery-service
-      
+
   ds-backend-customers-service:
     image: java:openjdk-8u91-jdk
     working_dir: /app
     volumes:
       - ./backend-modules/customers-service/target:/app
       - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 64 /app/customers-service.jar
+      - ./newrelic:/newrelic
+    command: /scripts/wait-for-config-and-discovery.sh /scripts/run-spring-boot.sh 90 customers-service.jar customers-service.yml
     environment:
-      eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
+      SPRING_CLOUD_CONFIG_URI: http://ds-toolbox-config-service:8080
+      NEW_RELIC_LICENSE_KEY: ${NRLK}
     ports:
       - "9001:8080"
     depends_on:
+      - ds-toolbox-config-service
       - ds-toolbox-discovery-service
-      
+
   ds-backend-checkout-service:
     image: java:openjdk-8u91-jdk
     working_dir: /app
     volumes:
       - ./backend-modules/checkout-service/target:/app
       - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 64 /app/checkout-service.jar
+      - ./newrelic:/newrelic
+    command: /scripts/wait-for-config-and-discovery.sh /scripts/run-spring-boot.sh 128 checkout-service.jar checkout-service.yml
     environment:
-      eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
-      spring.rabbitmq.addresses: rabbitmq:5672
+      SPRING_CLOUD_CONFIG_URI: http://ds-toolbox-config-service:8080
+      NEW_RELIC_LICENSE_KEY: ${NRLK}
     ports:
       - "9002:8080"
     depends_on:
+      - ds-toolbox-config-service
       - ds-toolbox-discovery-service
       - ds-backend-catalog-service
       - ds-backend-customers-service
@@ -133,10 +169,31 @@ services:
     volumes:
       - ./backend-modules/search-service/target:/app
       - ./scripts:/scripts
-    command: /scripts/wait-for-it.sh -t 30 -s ds-toolbox-discovery-service:8080 -- /scripts/run-spring-boot.sh 64 /app/search-service.jar
+      - ./newrelic:/newrelic
+    command: /scripts/wait-for-config-and-discovery.sh /scripts/run-spring-boot.sh 90 search-service.jar search-service.yml
     environment:
-      eureka.client.serviceUrl.defaultZone: http://ds-toolbox-discovery-service:8080/eureka
+      SPRING_CLOUD_CONFIG_URI: http://ds-toolbox-config-service:8080
+      NEW_RELIC_LICENSE_KEY: ${NRLK}
     ports:
       - "9003:8080"
     depends_on:
+      - ds-toolbox-config-service
       - ds-toolbox-discovery-service
+
+  ds-backend-orders-service:
+    image: java:openjdk-8u91-jdk
+    working_dir: /app
+    volumes:
+      - ./backend-modules/orders-service/target:/app
+      - ./scripts:/scripts
+      - ./newrelic:/newrelic
+    command: /scripts/wait-for-config-and-discovery.sh /scripts/run-spring-boot.sh 90 orders-service.jar orders-service.yml
+    environment:
+      SPRING_CLOUD_CONFIG_URI: http://ds-toolbox-config-service:8080
+      NEW_RELIC_LICENSE_KEY: ${NRLK}
+    ports:
+      - "9004:8080"
+    depends_on:
+      - ds-toolbox-config-service
+      - ds-toolbox-discovery-service
+      - rabbitmq

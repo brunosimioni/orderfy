@@ -1,5 +1,12 @@
 /target/
+/.ideia/
 .project
 .classpath
 /.settings/
 /bin/
+.env
+search-service.iml
+src/main/java/search/entities/
+src/main/main6.iml
+src/test/java/search/controllers/
+src/test/test1.iml

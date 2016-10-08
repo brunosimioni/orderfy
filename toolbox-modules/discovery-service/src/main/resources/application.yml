@@ -1,18 +1,18 @@
-spring.application.name: discovery-service
-
 spring:
+  application:
+    name: discovery-service
   cloud:
-      ignoredInterfaces:
-        - lo*
+    ignoredInterfaces:
+      - lo*
+  config:
+      uri: http://localhost:8004
+
 eureka:
-  password: password
   instance:
     leaseRenewalIntervalInSeconds: 10
     prefer-ip-address: true
-    metadataMap:
-      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://user:${eureka.password}@localhost:8080/eureka/
+      defaultZone: http://localhost:8001/eureka
