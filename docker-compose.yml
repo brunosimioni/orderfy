@@ -1,6 +1,19 @@
 version: '2'
 services:
 
+  datadog:
+    image: datadog/docker-dd-agent:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /proc/mounts:/host/proc/mounts:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    ports:
+      - "8125:8125"
+    environment:
+      API_KEY: ${DDAK}
+
+    privileged: true
+
 #  redis:
 #    image: redis
 #    ports:
