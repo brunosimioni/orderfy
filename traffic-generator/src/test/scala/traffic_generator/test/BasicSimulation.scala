@@ -9,40 +9,57 @@ import search.controllers.protobuf.SuggReq
 
 class BasicSimulation extends Simulation {
 
-  
   object Catalog {
 
-    val catalog = exec(http("Catalog")
-      .get("/catalog-service/catalog"))
+    val random = new util.Random
+    val feeder = Iterator.continually(Map("id" -> random.nextInt()))
+
+    val catalog = feed(feeder).exec(http("Catalog")
+      .get("/catalog-service/catalog/${id}"))
+
   }
 
   object Customers {
 
-    val customers = exec(http("Customers")
-      .get("/customers-service/customers"))
+    val random = new util.Random
+    val feeder = Iterator.continually(Map("id" -> random.nextInt()))
 
+    val customers = feed(feeder).exec(http("Customers")
+      .get("/customers-service/customers/${id}"))
   }
 
   object Search {
-    
+
+    val random = new util.Random
+
     val search = exec(http("Search")
         .post("/search-service/search/suggestions")
         .header("Content-Type", "application/x-protobuf")
         .header("Accept", "application/x-protobuf")
-        .body(ByteArrayBody(SuggReq.SuggReqMsg.newBuilder().setUserId("1").setTerm("asd").build().toByteArray()))
+        .body(ByteArrayBody(SuggReq.SuggReqMsg.newBuilder().setUserId(random.nextString(10)).setTerm(random.nextString(10)).build().toByteArray()))
       )
   }
 
   object Checkout {
 
-    val checkout = exec(http("PlaceOrder")
+    val random = new util.Random
+    val feeder = Iterator.continually(Map(
+        "idCustomer" -> random.nextInt(),
+        "idProduct1" -> random.nextInt(),
+        "idProduct2" -> random.nextInt(),
+        "idProduct3" -> random.nextInt()
+    ))
+
+    val checkout = feed(feeder).exec(http("PlaceOrder")
         .post("/checkout-service/checkout/placeorder")
-        .body(StringBody("""{"idsProducts":[1,2,3],"idCustomer":5}""")).asJSON
+        .body(StringBody(
+          """{ "idsProducts":[ "${idProduct1}", "${idProduct2}", "${idProduct3}" ],"idCustomer":"${idCustomer}" }"""
+        )).asJSON
     )
   }
     
   val httpConf = http
-    .baseURL("http://nssp:8000")
+    .baseURL("http://localhost:8000")
     .acceptHeader("text/html,application/xhtml+xml,application/xml,application/json;q=0.9,*/*;q=0.8")
     .doNotTrackHeader("1")
     .acceptLanguageHeader("en-US,en;q=0.5")
@@ -55,17 +72,17 @@ class BasicSimulation extends Simulation {
   setUp(
     frontend.inject(
       atOnceUsers(1),
-      constantUsersPerSec(20) during(100 seconds) randomized,
-      heavisideUsers(3000) over(20 seconds),
-      nothingFor(30 seconds),
-      constantUsersPerSec(20) during(300 seconds) randomized
+      constantUsersPerSec(20) during(100 seconds) randomized
+//      heavisideUsers(3000) over(20 seconds),
+//      nothingFor(30 seconds),
+//      constantUsersPerSec(20) during(300 seconds) randomized
     ),
     searchers.inject(
       atOnceUsers(1),
-      constantUsersPerSec(50) during(100 seconds) randomized,
-      heavisideUsers(6000) over(20 seconds),
-      nothingFor(30 seconds),
-      constantUsersPerSec(50) during(300 seconds) randomized
+      constantUsersPerSec(50) during(100 seconds) randomized
+//      heavisideUsers(6000) over(20 seconds),
+//      nothingFor(30 seconds),
+//      constantUsersPerSec(50) during(300 seconds) randomized
     )
   ).protocols(httpConf)
 
