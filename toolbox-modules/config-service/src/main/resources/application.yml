@@ -10,10 +10,3 @@ spring:
       server:
         native:
          searchLocations: file:///${user.home}/git/orderfy/configs,file:///configs
-
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8001/eureka/

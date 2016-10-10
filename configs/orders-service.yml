@@ -1,10 +1,40 @@
 spring:
-  application:
-    name: orders-service
+  cloud:
+    stream:
+      bindings:
+        input:
+          binder: ocbinder
+          destination: orders
+---
 
-  rabbitmq:
-    host: rabbitmq
+spring:
+  profiles: local
+  cloud:
+    stream:
+      binders:
+        ocbinder:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
+---
+spring:
+  profiles: docker-compose
+  cloud:
+    stream:
+      binders:
+        ocbinder:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: rabbitmq
 eureka:
   client:
     serviceUrl:

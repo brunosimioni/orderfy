@@ -1,6 +1,39 @@
 spring:
-  application:
-    name: checkout-service
+  cloud:
+    stream:
+      default-binder: rabbit1
+      bindings:
+        output:
+          binder: ocbinder
+          destination: orders
+          contentType: application/json
+
+---
+spring:
+  profiles: local
+  cloud:
+    stream:
+      binders:
+        rabbit1:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+        ocbinder:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
+---
+spring:
+  profiles: docker-compose
   cloud:
     stream:
       binders:
@@ -10,9 +43,12 @@ spring:
             spring:
               rabbitmq:
                 host: rabbitmq
-
-  rabbitmq:
-    host: rabbitmq
+        ocbinder:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: rabbitmq
 
 eureka:
   client:

@@ -2,6 +2,7 @@ package checkout.usecases;
 
 import java.util.ArrayList;
 
+import checkout.stream.OrdersConfirmationGateway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,10 @@ public class PlaceOrderUseCase {
 	
 	@Autowired
 	CustomersRepository customersClient;
-	
+
+	@Autowired
+	private OrdersConfirmationGateway ordersConfirmationGateway;
+
 	public OrderConfirmation placesAnOrder(Order anOrder) {
 
 		OrderConfirmation oc = new OrderConfirmation();
@@ -43,6 +47,9 @@ public class PlaceOrderUseCase {
 		logger.info("Got customer from customers: {}", c);
 		
 		oc.setId((int)(Math.random()*100));
+
+		logger.info("Sending message: {}", oc);
+		ordersConfirmationGateway.generate(oc);
 		return oc;
 	}
 }

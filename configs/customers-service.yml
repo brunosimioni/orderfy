@@ -1,6 +1,13 @@
 spring:
-  application:
-    name: customers-service
+  profiles: local
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
+---
+spring:
+  profiles: docker-compose
 
 eureka:
   client:

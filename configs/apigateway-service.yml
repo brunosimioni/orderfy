@@ -1,6 +1,22 @@
 spring:
-  application:
-    name: apigateway-service
+  profiles: local
+  cloud:
+    stream:
+      binders:
+        rabbit1:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
+---
+spring:
+  profiles: docker-compose
   cloud:
     stream:
       binders:

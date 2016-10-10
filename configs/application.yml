@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    ignoredInterfaces:
+      - lo*
+eureka:
+  instance:
+    prefer-ip-address: true

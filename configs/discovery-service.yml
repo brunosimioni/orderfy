@@ -1,6 +1,20 @@
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+---
 spring:
-  application:
-    name: discovery-service
+  profiles: local
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
+---
+spring:
+  profiles: docker-compose
 
 eureka:
   client:
