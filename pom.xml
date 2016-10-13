@@ -20,6 +20,7 @@
 		<module>backend-modules/checkout-service</module>
 		<module>backend-modules/search-service</module>
 		<module>backend-modules/orders-service</module>
+		<module>backend-modules/lists-service</module>
 		<module>toolbox-modules/discovery-service</module>
 		<module>toolbox-modules/apigateway-service</module>
 		<module>toolbox-modules/circuitmonitor-service</module>
@@ -87,6 +88,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+        <dependency>
+            <groupId>org.coursera</groupId>
+            <artifactId>dropwizard-metrics-datadog</artifactId>
+            <version>1.1.6</version>
+        </dependency>		
+		
 		<dependency>
 			<groupId>org.jolokia</groupId>
 			<artifactId>jolokia-core</artifactId>

@@ -66,6 +66,7 @@ services:
       SPRING_CLOUD_CONFIG_URI: http://ds-toolbox-config-service:8080
       SPRING_PROFILES_ACTIVE: docker-compose
       NEW_RELIC_LICENSE_KEY: ${NRLK}
+      METRICS_REPORTERS_TRANSPORT_APIKEY: ${DDAK}
     ports:
       - "8001:8080"
     depends_on:
