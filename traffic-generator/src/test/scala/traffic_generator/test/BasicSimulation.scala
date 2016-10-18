@@ -59,31 +59,31 @@ class BasicSimulation extends Simulation {
   }
     
   val httpConf = http
-    .baseURL("http://localhost:8000")
+    .baseURL("http://nssp:8000")
     .acceptHeader("text/html,application/xhtml+xml,application/xml,application/json;q=0.9,*/*;q=0.8")
     .doNotTrackHeader("1")
     .acceptLanguageHeader("en-US,en;q=0.5")
     .acceptEncodingHeader("gzip, deflate")
     .userAgentHeader("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:16.0) Gecko/20100101 Firefox/16.0")
 
-  val frontend = scenario("Frontend").exec(Catalog.catalog, Customers.customers, Checkout.checkout)
+  val frontend = scenario("Frontend").exec(/*Catalog.catalog, Customers.customers,*/ Checkout.checkout)
   val searchers = scenario("Searches").exec(Search.search)
   
   setUp(
     frontend.inject(
       atOnceUsers(1),
-      constantUsersPerSec(20) during(100 seconds) randomized
+      constantUsersPerSec(200) during(10 seconds) randomized
 //      heavisideUsers(3000) over(20 seconds),
 //      nothingFor(30 seconds),
 //      constantUsersPerSec(20) during(300 seconds) randomized
-    ),
-    searchers.inject(
-      atOnceUsers(1),
-      constantUsersPerSec(50) during(100 seconds) randomized
+    )
+//    searchers.inject(
+//      atOnceUsers(1),
+//      constantUsersPerSec(500) during(10 seconds) randomized
 //      heavisideUsers(6000) over(20 seconds),
 //      nothingFor(30 seconds),
 //      constantUsersPerSec(50) during(300 seconds) randomized
-    )
+//    )
   ).protocols(httpConf)
 
 }

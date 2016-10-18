@@ -42,7 +42,7 @@ services:
       - ./toolbox-modules/apigateway-service/target:/app
       - ./scripts:/scripts
       - ./newrelic:/newrelic
-    command: /scripts/wait-for-config-and-discovery.sh /scripts/run-spring-boot.sh 128 apigateway-service.jar apigateway-service.yml
+    command: /scripts/wait-for-config-and-discovery.sh /scripts/run-spring-boot.sh 256 apigateway-service.jar apigateway-service.yml
     environment:
       SPRING_CLOUD_CONFIG_URI: http://ds-toolbox-config-service:8080
       SPRING_PROFILES_ACTIVE: docker-compose
@@ -79,7 +79,7 @@ services:
       - ./toolbox-modules/circuitmonitor-service/target:/app
       - ./scripts:/scripts
       - ./newrelic:/newrelic
-    command: /scripts/wait-for-config-and-discovery.sh /scripts/run-spring-boot.sh 90 circuitmonitor-service.jar circuitmonitor-service.yml
+    command: /scripts/wait-for-config-and-discovery.sh /scripts/run-spring-boot.sh 256 circuitmonitor-service.jar circuitmonitor-service.yml
     environment:
       SPRING_CLOUD_CONFIG_URI: http://ds-toolbox-config-service:8080
       SPRING_PROFILES_ACTIVE: docker-compose
@@ -169,7 +169,7 @@ services:
       - ./backend-modules/checkout-service/target:/app
       - ./scripts:/scripts
       - ./newrelic:/newrelic
-    command: /scripts/wait-for-config-and-discovery.sh /scripts/run-spring-boot.sh 128 checkout-service.jar checkout-service.yml
+    command: /scripts/wait-for-config-and-discovery.sh /scripts/run-spring-boot.sh 256 checkout-service.jar checkout-service.yml
     environment:
       SPRING_CLOUD_CONFIG_URI: http://ds-toolbox-config-service:8080
       SPRING_PROFILES_ACTIVE: docker-compose

@@ -3,12 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.brunosimioni</groupId>
-        <artifactId>orderfy</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
-    </parent>
+    <groupId>com.brunosimioni</groupId>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <go.sdk.version>1.7.1</go.sdk.version>
@@ -24,19 +20,21 @@
             <plugin>
                 <groupId>com.igormaznitsa</groupId>
                 <artifactId>mvn-golang-wrapper</artifactId>
-                <version>${main-project-version}</version>
+                <version>2.1.1</version>
                 <extensions>true</extensions>
                 <configuration>
                     <goVersion>${go.sdk.version}</goVersion>
+                       <command/>
                 </configuration>
                 <executions>
                     <execution>
+                        <id>golang-run</id>
                         <goals>
                             <goal>run</goal>
                         </goals>
                         <configuration>
                             <packages>
-                                <package>main.go</package>
+                                <app>main.go</app>
                             </packages>
                         </configuration>
                     </execution>

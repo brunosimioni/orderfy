@@ -7,24 +7,17 @@
 
 A simple proof-of-technology for an ecommerce platform. This is a currently work-in-progress, composed by following techs:
 
-### Foundation && CI
+### Foundation, Architecture and CI
 - Spring Boot 1.4.0 testing [done]
 - Travis CI continuous integration [done]
 - Coveralls for static analysis and code lint [partially done]
-- Spring Cloud Netflix OSS
-   - Eureka: client-side service discovery [done] 
-   - Hystrix: circuit breaker implementation [done]
-   - Turbine: circuit breaker monitoring aggregation [done]
-   - Feign: Rest serivce consumption [done]
-   - Zuul: API gateway [done]
-   - Configuration: externalized and centralized configuration by using git [not started yet]
-   - Stream: amqp messaging streaming [done]
+- Spring Cloud and Spring Cloud Netflix OSS [done]
 - Clean Architecture [done]
 - Google Protobuf Protocol [done]
-- Swagger API documentation with Spring Fox
-
-### Testing
-- Gatling [done]
+- Swagger API documentation with Spring Fox [done]
+- Golang REST API [partially done]
+- Scala REST API (Play! Framework) [not started yet]
+- Gatling, Netty and Akka [done]
 
 ### Data Mining
 - Apache Kafka [not started yet]
@@ -32,7 +25,7 @@ A simple proof-of-technology for an ecommerce platform. This is a currently work
 
 ### Data Storage and processing
 - Apache Cassandra [not started yet]
-- RabbitMQ []
+- RabbitMQ and Spring Cloud Stream [done]
 - Redis [partially done]
 - MongoDB [partially done]
 - Docker Compose for local deployment with wait-for-it dependencies [done]
@@ -47,17 +40,29 @@ A simple proof-of-technology for an ecommerce platform. This is a currently work
 - `toolbox-modules`: Toolbox and common modules to keep orderfy up&running
 - `traffic-generator`: A simple random traffic generator for orderfy platform
 - `scripts`: Build and run tools
+- `configs`: Spring Cloud Config Server files
+- `newrelic`: New Relic APM modules configuration files
 
 # Application Modules [wip]
 
+Every java-based backend module requests by using Hystrix and Feign, granting circuit-breakers on integrations.
+
+*Backend*
 - `backend-modules/catalog-service`: a wrapper service to [Akeneo PIM](https://www.akeneo.com/)
 - `backend-modules/checkout-service`: a simple cart&checkout service by consuming discovery services, powered by hystrix circuit-breakers, monitoring and API documentation
 - `backend-modules/customers-service`: a customer-oriented MDM
+- `backend-modules/lists-service`: a Golang REST api for wish lists
+- `backend-modules/orders-service`: a Spring Cloud Stream (RabbitMQ) wrapper for orders processing
 - `backend-modules/search-service`: a thin Elastic-search wrapper, enabled by [Protobuf](https://github.com/google/protobuf) protocol
-- `toolbox-modules/discovery-service`: Netflix OSS Eureka service discovery server
+
+*Toolbox*
 - `toolbox-modules/apigateway-service`: Netflix OSS Zuul API Gateway
 - `toolbox-modules/circuitmonitor-service`: Netflix OSS Turbine (Hystrix aggregator monitor)
-- `toolbox-modules/circuitmonitor-service`: Netflix OSS Turbine (Hystrix aggregator monitor)
+- `toolbox-modules/config-service`: Spring Cloud Config Server
+- `toolbox-modules/discovery-service`: Netflix OSS Eureka service discovery server
+- `toolbox-modules/instancesadmin-service`: Spring Boot Admin server
+
+*Traffic Feed*
 - `traffic-generator`: Gatling Framework (Akka / Play / Scala) powered stress tests
 
 ## Run it
