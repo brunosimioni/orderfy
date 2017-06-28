@@ -15,6 +15,9 @@ public class FeignClientConfiguration {
 	
 	@Bean
 	public ErrorDecoder customErrorDecoder() {
+		
+		// check this out:
+		// https://stackoverflow.com/questions/42730881/how-do-you-allow-400-errors-to-propagate-when-using-feign-with-hystrix/44664050#44664050
 		return new FeignCustomErrorDecoder();
 	}
 	
